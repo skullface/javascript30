@@ -1,6 +1,6 @@
 # #JavaScript30
 
-This repo houses progress for [#JavaScript30](https://javascript30.com/) by Wes Bos! Exercises that I feel are substantial or interesting enough are in their own repo. This rest are in here! Some exercises feed into my [100 JavaScript Projects](https://skullface.github.com/100-javascript-projects) project, Ⓟ尺ⓞ🅹e𝖈𝖙 𝓅𝓇𝑜𝒿𝑒𝒸𝓉 pro͈je̟ͅc̱̙̜̼̳͇̟͎̪̩ͅt̤̣̖̤̘̲͍͇͎̻̱̻
+This repo houses my progress for [Wes Bos](https://wesbos.com)’ [#JavaScript30](https://javascript30.com/) course! Exercises that I feel are substantial or interesting enough are in their own repo and the rest are in here! Some exercises feed into my [100 JavaScript Projects](https://skullface.github.com/100-javascript-projects) Ⓟ尺ⓞ🅹e𝖈𝖙 𝓅𝓇𝑜𝒿𝑒𝒸𝓉 pro͈je̟ͅc̱̙̜̼̳͇̟͎̪̩ͅt̤̣̖̤̘̲͍͇͎̻̱̻– - - —
 
 # 👩🏻‍💻👩🏻‍💻👩🏻‍💻
 
@@ -8,9 +8,9 @@ This repo houses progress for [#JavaScript30](https://javascript30.com/) by Wes 
 | --- | :------- | :--- |
 | 1   | [Kingdom Hearts soundboard](https://github.com/skullface/kingdom-hearts-soundboard/) | 🎶 [View exercise](https://skullface.github.io/kingdom-hearts-soundboard/) |
 | 2   | [Clock](https://github.com/skullface/kingdom-hearts-soundboard/) | 🕓 [View exercise](https://skullface.github.io/javascript30/issa-clock/) |
-| 3   | [CSS Variables](tree/master/variables) |  |
-| 4   | [Array Cardio (Day 1)](tree/master/array-cardio-1) |  |
-| 5   | [Flex Panel Gallery ft. 이달의 소녀](tree/master/flex-panel-gallery) | 🗓 [View exercise](https://skullface.github.io/javascript30/flex-panel-gallery/) |
+| 3   | [CSS variables](variables) |  |
+| 4   | [Array cardio 1](array-cardio-1) |  |
+| 5   | [이달의 소녀 gallery](girl-of-the-month-project) | 🗓 [View exercise](https://skullface.github.io/javascript30/girl-of-the-month-project) |
 | 6   |  |  |
 | 7   |  |  |
 | 8   |  |  |
