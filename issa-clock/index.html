@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>issa clock</title>
+
+  <style>
+    html {
+      background: #eee;
+      text-align: center;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font: 400 2rem "Avenir", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height: 1;
+      text-align: center;
+    }
+
+    .clock__digital {
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 2rem;
+    }
+
+    .clock__analog {
+      position: relative;
+      width: 10rem;
+      height: 10rem;
+      padding: 3rem; /* visual distance between clock edge & hands */
+      background: #fff;
+      border: 20px solid white;
+      border-radius: 50%;
+      box-shadow: inset 0 0 40px 5px rgba(0,0,0,0.1);
+    }
+
+      @media screen and ( min-width: 666px ) {
+        .clock__analog {
+          width: 30rem;
+          height: 30rem;
+        }
+      }
+
+    .clock__face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .clock__face > div {
+      position: absolute;
+    }
+
+      .clock__face__center {
+        top: calc(50% - 10px);
+        left: calc(50% - 10px);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #F4D85C; /* Braun yellow */
+      }
+
+    .hand {
+      top: 50%;
+      transform: rotate(90deg);
+      transform-origin: right; /* transforms to the rightmost edge on the x-axis of where it ends via its width + horizonal margin */
+      transition: all 0.5s cubic-bezier(0.42, 0, 0.11, 1.38); /* custom bezier timing function to feel like tick-tock */
+    }
+
+      /*
+       * the standard length for the clock hand is 50%
+       * (half of the size of the full clock)
+       * because of our transform, this is defined by the "width"
+      */
+
+      .hand__hour,
+      .hand__minute {
+      height: 15px; /* "width" of the hands */
+        border-radius: 2px;
+        background: black;
+      }
+
+      .hand__hour {
+        width: 35%;
+        margin-left: 15%; /* offset the different from our standard hand "length" (width) of 50% */
+      }
+
+      .hand__minute {
+        width: 45%;
+        margin-left: 5%; /* offset the different from our standard hand "length" (width) of 50% */
+      }
+
+      .hand__second {
+        width: 50%;
+        height: 3px; /* "width" of the hand */
+        border-radius: 20px;
+        background: #F4D85C; /* hi Dieter Rams */
+      }
+  </style>
+</head>
+<body class="container">
+
+  <div class="clock__digital">
+  </div>
+
+  <div class="clock__analog">
+    <div class="clock__face">
+      <div class="hand hand__hour"></div>
+      <div class="hand hand__minute"></div>
+      <div class="hand hand__second"></div>
+      <div class="clock__face__center"></div>
+    </div>
+  </div>
+
+  <script>
+    /* digital clock display variable */
+    const timeDisplay = document.querySelector('.clock__digital');
+
+    /* analog clock hands variables */
+    const handSecond = document.querySelector('.hand__second');
+    const handMinute = document.querySelector('.hand__minute');
+    const handHour = document.querySelector('.hand__hour')
+    const hand = document.querySelector('.hand')
+
+    /* function to rotate the HTML elements with class `hand`  */
+    function rotateHand(hand, degree) {
+      hand.setAttribute("style", `transform: rotate(${degree}deg)`)
+    }
+
+    /* function to actually do stuff with the time via Date() */
+    function setDate() {
+      const now = new Date();
+
+      /* inject stuff into the div we specificed in the timeDisplay variable earlier */
+      /*
+      timeDisplay.innerHTML = now.getHours() + ':' + now.getMinutes() + ':' + (now.getSeconds() < 10 ? '0' + now.getSeconds() : now.getSeconds()); // displays the hours, minutes, and seconds by explicitly calling them:
+      */
+      timeDisplay.innerHTML = now.toLocaleString(); // display by converting the `Date()` to the browser/OS local timezone
+
+      /*
+       * rotate the specific hand divs using the rotateHand function
+       * based on the actual Date() info and some math to make them degrees of a circle
+       * adding 90 to each because our hands start out rotated 90º to the 12:00:00
+       * syntax: function(first variable, second variable)
+       */
+      rotateHand(handSecond, now.getSeconds() * 6 + 90); // math
+      rotateHand(handMinute, now.getMinutes() * 6 + 90); // math
+      rotateHand(handHour, now.getHours() * 30 + 90); // math
+
+      /* need some logic to determine if the second & minute hands are at 90
+       * to remove the glitchy jitter of the CSS transform if they are!
+       * we'll do this by making the length (in seconds) of the transition 0
+       * so it appears to do nothing (glitches for 0s instead of 0.5s)
+
+      if rotateHand(handSecond, degree == 90)
+        transition = 0
+      else
+        transition is back to normal
+      */
+    }
+
+    setInterval(setDate, 1000); // method to call the function at an interval. syntax: (function, milliseconds)
+  </script>
+</body>
+</html>
