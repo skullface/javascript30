@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Cardio 💪</title>
+</head>
+<body>
+  <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+
+<script>
+  const inventors = [
+    { first: 'Albert', last: 'Einstein', born: 1879, died: 1955 },
+    { first: 'Isaac', last: 'Newton', born: 1643, died: 1727 },
+    { first: 'Galileo', last: 'Galilei', born: 1564, died: 1642 },
+    { first: 'Marie', last: 'Curie', born: 1867, died: 1934 },
+    { first: 'Johannes', last: 'Kepler', born: 1571, died: 1630 },
+    { first: 'Nicolaus', last: 'Copernicus', born: 1473, died: 1543 },
+    { first: 'Max', last: 'Planck', born: 1858, died: 1947 },
+    { first: 'Katherine', last: 'Blodgett', born: 1898, died: 1979 },
+    { first: 'Ada', last: 'Lovelace', born: 1815, died: 1852 },
+    { first: 'Sarah E.', last: 'Goode', born: 1855, died: 1905 },
+    { first: 'Lise', last: 'Meitner', born: 1878, died: 1968 },
+    { first: 'Hanna', last: 'Hammarström', born: 1829, died: 1909 }
+  ];
+
+  const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
+
+
+  /*
+   * Array.prototype.filter()
+   * ===========================================
+   * Filter the list of inventors for those who were born in the 1500's
+   */
+
+  /*
+   * long version:
+   *
+    const fifteen = inventors.filter(function(inventor){
+    if(inventor.born >= 1500 && inventor.born <= 1599) {
+      return true;
+    }
+    });
+   *
+   */
+
+  const sixteenthCentury = inventors.filter(inventor => (inventor.born >= 1500 && inventor.born <= 1599));
+
+  console.table(sixteenthCentury);
+
+
+  /*
+   * Array.prototype.map()
+   * ===========================================
+   * Give us an array of the inventors' first and last names
+   */
+
+  const fullNames = inventors.map(function(inventor) {
+    return `${inventor.first} ${inventor.last}`;
+  }); //I WROTE THAT ONE BY MYSELF BITCH
+
+  console.log(fullNames);
+
+
+  /*
+   * Array.prototype.sort()
+   * ===========================================
+   * Sort the inventors by birthdate, oldest to youngest
+   */
+
+ /*
+  * long version:
+  *
+  const birthdayParty = inventors.sort(function(x, y) {
+    if(x.born > y.born) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+  *
+  */
+
+  const birthdayParty = inventors.sort((x, y) => x.born > y.born ? 1 : -1);
+
+  console.table(birthdayParty);
+
+
+  /*
+   * Array.prototype.reduce()
+   * ===========================================
+   * How many years did all the inventors live?
+   */
+
+  const totalLifespan = inventors.reduce((total, inventor) => {
+    return total + (inventor.died - inventor.born);
+  }, 0);
+
+  console.log(totalLifespan);
+
+
+  /*
+   * ===========================================
+   * Sort the inventors by years lived
+   */
+
+  const seniority = inventors.sort(function(x, y) {
+    const seniorityOldest = x.died - x.born;
+    const seniorityNext = y.died - y.born;
+    return seniorityOldest > seniorityNext ? -1 : 1;
+/*  if seniorityOldest > seniorityNext {
+      return -1;
+    }
+    else {
+      return 1;
+    }
+*/ //long version of the ternary operator `? : above`
+  });
+
+  console.table(seniority);
+
+
+  /*
+   * create a list of Boulevards in Paris that contain 'de' anywhere in the name
+   * ===========================================
+   * https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+   */
+  /*
+  const category = document.querySelector('.mw-category');
+
+   * const links = category.querySelectorAll('a'));
+   * doesn't work for our purposes because that gives us the data in a nodeMap thingy, not an array. so let's make it an array!
+
+  const links = Array.from(category.querySelectorAll('a'));
+
+   * alsooOo we could just do `.mw-category a` in the first variable, but this proves we can "querySelect" more than one thing. cool! another way to write that Array line is
+   * const links = [...category.querySelectorAll('a')];
+   * using ES6 spreads… ok!!
+
+  const de = links
+    .map(link => link.textContent)
+    .filter(streetName => streetName.includes('de'));
+    // ^ putting each of those on their own line lets us do the mapping and the filtering right after each other in the same variable
+  */
+
+  /*
+   * sort Exercise
+   * ===========================================
+   * Sort the people alphabetically by last name
+   */
+
+  const alphabetically = people.sort((lastPerson, nextPerson) => {
+    const [aLastName, aFirstName] = lastPerson.split(', '); // what do these brackets do????
+    const [bLastName, bFirstName] = lastPerson.split(', ');
+    return aLastName > bLastName ? 1 : -1; // i get these idea of this from our sorting, but i do not understand the above thingies with the split because those aren't even in our output?
+  });
+  console.log(alphabetically);
+
+  /*
+   * 8. Reduce Exercise
+   * ===========================================
+   * Sum up the instances of each of these
+   */
+
+  const vehicles = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+  const transportation = vehicles.reduce(function(obj, item){
+    if(!obj[item]) {
+      obj[item] = 0;
+    }
+    obj[item]++;
+    return obj;
+  }, {});
+
+  // what the fuck was that
+
+  console.log(transportation);
+
+</script>
+</body>
+</html>

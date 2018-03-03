@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flex Panels ft. 이달의 소녀</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,800" rel="stylesheet">
+</head>
+
+<body>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #333;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    .panels {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1200px) {
+      .panels {
+        flex-direction: column;
+      }
+    }
+
+    .panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      background-size: cover;
+      background-position: center;
+      transition:
+        flex 0.3s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s;
+    }
+
+    .panel p {
+      transition: opacity 200ms ease-in-out;
+    }
+
+    .panel-4 {
+      background-image: url('chuu.jpg');
+    }
+
+    .panel-2 {
+      background-image: url('haseul.jpg');
+    }
+
+    .panel-3 {
+      background-image: url('lip.jpg');
+    }
+
+    .panel-1 {
+      background-image: url('heejin.jpg');
+    }
+
+    .panel-5 {
+      background-image: url('gowon.jpg');
+    }
+
+    .panel:before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.33);
+    }
+
+    .panel.open {
+      flex: 60;
+    }
+
+
+    .panel p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1 0 auto;
+      margin: 0;
+      width: 100%;
+      transition: transform 0.3s;
+    }
+
+    .panel p:not(:nth-of-type(2)) {
+      font-weight: 800;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 9px;
+    }
+
+    @media (max-width: 1200px) {
+      .panel p:not(:nth-of-type(2)) {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      .panel.open p:not(:nth-of-type(2)) {
+        opacity: 1;
+      }
+    }
+
+    .panel p {
+      z-index: 20;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.5), 0 0 50px rgba(0, 0, 0, 0.33);
+      font-size: 2em;
+    }
+
+    @media (min-width: 1200px) {
+      .panel.open {
+        flex: 5;
+      }
+
+      .panel p:first-of-type {
+        transform: translateY(-100%);
+      }
+
+      .panel p:last-of-type {
+        transform: translateY(100%);
+      }
+
+      .panel.open-active p:not(:nth-of-type(2)) {
+        transform: translateY(0%);
+      }
+    }
+
+    .panel p:nth-of-type(2) {
+      font-size: 3.5em;
+      font-weight: 200;
+      opacity: 1;
+    }
+
+    .panel:hover p:nth-of-type(2) {
+      opacity: .33;
+    }
+
+    .panel.open-active p:nth-of-type(2) {
+      opacity: 0;
+    }
+
+  </style>
+
+
+  <div class="panels">
+    <div class="panel panel-1">
+      <p>heejin</p>
+      <p>girl</p>
+      <p>희진</p>
+    </div>
+    <div class="panel panel-2">
+      <p>haseul</p>
+      <p>of</p>
+      <p>하슬</p>
+    </div>
+    <div class="panel panel-3">
+      <p>kim lip</p>
+      <p>the</p>
+      <p>김립</p>
+    </div>
+    <div class="panel panel-4">
+      <p>chuu</p>
+      <p>month</p>
+      <p>츄</p>
+    </div>
+    <div class="panel panel-5">
+      <p>go won</p>
+      <p>project</p>
+      <p>고원</p>
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen(){
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e){
+      console.log(e.propertyName);
+      if(e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+  </script>
+
+
+
+</body>
+</html>
